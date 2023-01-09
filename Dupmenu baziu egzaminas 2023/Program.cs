@@ -28,6 +28,10 @@ StudentDbContext context= new StudentDbContext();
 
 
 
+
+
+
+
 // Duomenu sukelimas
 
 /*
@@ -114,6 +118,7 @@ void RemoveLesson()
     context.SaveChanges();
 }
 
+
 void RemoveStudent()
 {
 
@@ -121,6 +126,7 @@ void RemoveStudent()
     context.Students.Remove(removeStudent);
     context.SaveChanges();
 }
+
 
 void RemoveDepartament()
 {
@@ -140,6 +146,8 @@ void ChangeStudentDepartament()
 }
 
 
+
+*/
 
 
 void ShowDepartamentStudents()
