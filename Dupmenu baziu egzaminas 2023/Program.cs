@@ -15,9 +15,7 @@ StudentDbContext context= new StudentDbContext();
 //RemoveLesson();
 //RemoveStudent();
 //RemoveDepartament();
-
 //ChangeStudentDepartament();
-
 //ShowDepartamentStudents();
 //ShowDepartamentLessons();
 //ShowStudentLessons();
@@ -34,11 +32,11 @@ StudentDbContext context= new StudentDbContext();
 
 // Duomenu sukelimas
 
-/*
+
 //1.Sukurti departamentą ir į jį pridėti studentus,
 //paskaitas(papildomi points jei pridedamos paskaitos
 //jau egzistuojančios duomenų bazėje).
-
+/*
 Departament departament1 = new Departament("Ekonomikos Fakultetas");
 Departament departament2 = new Departament("Matematikos Fakultetas");
 Departament departament3 = new Departament("Dailes Fakultetas");
@@ -87,6 +85,8 @@ context.Departaments.AddRange(departament1, departament2, departament3);
 context.Students.AddRange(student1, student2, student3, student4, student5, student6);
 context.Lessons.AddRange(leson1, leson2, leson3, leson4, leson5, leson6);
 context.SaveChanges();
+
+
 */
 
 
@@ -95,9 +95,9 @@ context.SaveChanges();
 
 void CreateNewDepartament()
     {
-    Departament newDep = new Departament("IT fakultetas");
-    Lesson newLes = new Lesson("C#");
-    Student newStud = new Student("Domantas");
+    Departament newDep = new Departament("Istorijos");
+    Lesson newLes = new Lesson("Senoves graikija");
+    Student newStud = new Student("Zygimantas");
 
     newStud.Lessons = new List<Lesson> { newLes };
     newLes.Departaments = new List<Departament> { newDep };
@@ -107,6 +107,9 @@ void CreateNewDepartament()
     context.Students.Add(newStud);
     context.Lessons.Add(newLes);
     context.Departaments.Add(newDep);
+    newDep.Students.Add(newStud);   
+    newDep.Lessons.Add(newLes);
+    newStud.Lessons.Add(newLes);
     context.SaveChanges();
      }
 
@@ -141,23 +144,23 @@ void ChangeStudentDepartament()
 {
 
     var stud = context.Students.Single(x => x.Id == 1);
-    stud.DepartamentId = 6;
+    stud.DepartamentId = 5;
     context.SaveChanges();
 }
 
 
 
-*/
+
 
 
 void ShowDepartamentStudents()
 {
-    Console.WriteLine("Departamento Nr.2  studentu sarasas");   
+    Console.WriteLine("Departamento Nr.4 studentu sarasas");
 
-    var list = context.Departaments.Include(s => s.Students).Where(i => i.Id == 2).FirstOrDefault();
+    var list = context.Departaments.Include(s => s.Students).Single(i => i.Id == 4);
     var students = list.Students;
     Console.WriteLine();
-    Console.WriteLine($"{context.Departaments.Single(x => x.Id == 2).Name} studentai");
+    Console.WriteLine($"{context.Departaments.Single(x => x.Id == 4).Name} studentai");
     Console.WriteLine();
     Console.WriteLine("Saraso pradzia");
     Console.WriteLine();
@@ -174,12 +177,12 @@ void ShowDepartamentStudents()
 
 void ShowDepartamentLessons()
 {
-    Console.WriteLine("Departamento Nr.2  paskaitu sarasas");
+    Console.WriteLine("Departamento Nr.5  paskaitu sarasas");
 
-    var list = context.Departaments.Include(s => s.Lessons).Where(i => i.Id == 2).FirstOrDefault();
+    var list = context.Departaments.Include(s => s.Lessons).Single(i => i.Id == 5);
     var lesons = list.Lessons;
     Console.WriteLine();
-    Console.WriteLine($"{context.Departaments.Single(x => x.Id == 2).Name} paskaitos");
+    Console.WriteLine($"{context.Departaments.Single(x => x.Id == 5).Name} paskaitos");
     Console.WriteLine();
     Console.WriteLine("Saraso pradzia");
     Console.WriteLine();
@@ -198,10 +201,10 @@ void ShowStudentLessons()
 {
     Console.WriteLine(" Psirinkto studento  pagal id paskaitu sarasas");
 
-    var list = context.Students.Include(s => s.Lessons).Where(i => i.Id == 10).FirstOrDefault();
+    var list = context.Students.Include(s => s.Lessons).Single(i => i.Id == 2);
     var lesons = list.Lessons;
     Console.WriteLine();
-    Console.WriteLine($"{context.Students.Single(x => x.Id == 10).Name} paskaitos");
+    Console.WriteLine($"{context.Students.Single(x => x.Id == 2).Name} paskaitos");
     Console.WriteLine();
     Console.WriteLine("Saraso pradzia");
     Console.WriteLine();
@@ -223,7 +226,7 @@ void AddNewStudentToDepartament()
 
     Student newStud = new Student("Irma");
 
-    var dep = context.Departaments.First(x => x.Id == 2);
+    var dep = context.Departaments.First(x => x.Id == 4);
     
 
     context.Students.Add(newStud);
@@ -238,9 +241,9 @@ void AddNewLectureToDepartament()
 
     Console.WriteLine("Priskiriamas nauja i departamenta pagal Id");
 
-    Lesson newLes = new Lesson("Taikomoji mtematika");
+    Lesson newLes = new Lesson("Senoves Roma");
 
-    var dep = context.Departaments.First(x => x.Id == 2);
+    var dep = context.Departaments.First(x => x.Id == 5);
 
 
     context.Lessons.Add(newLes);
@@ -248,4 +251,3 @@ void AddNewLectureToDepartament()
     context.Departaments.Update(dep);
     context.SaveChanges();
 }
-

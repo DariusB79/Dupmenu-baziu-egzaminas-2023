@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dupmenu_baziu_egzaminas_2023.Migrations
 {
     [DbContext(typeof(StudentDbContext))]
-    [Migration("20230108220842_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230109201543_InitialCeate")]
+    partial class InitialCeate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

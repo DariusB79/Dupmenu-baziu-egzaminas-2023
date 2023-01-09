@@ -11,7 +11,7 @@ namespace Dupmenu_baziu_egzaminas_2023
 
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public int DepartamentId { get; set; }
 
         public List<Lesson> Lessons { get; set; }
 

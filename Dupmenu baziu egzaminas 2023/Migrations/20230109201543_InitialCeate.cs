@@ -2,7 +2,7 @@
 
 namespace Dupmenu_baziu_egzaminas_2023.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCeate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
